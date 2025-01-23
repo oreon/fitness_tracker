@@ -1,10 +1,19 @@
+import 'package:fitness_tracker/notifications_service.dart';
 import 'package:flutter/material.dart';
-import '../exercise_tab.dart';
-import '../meditation_tab.dart';
-import '../diet_tab.dart';
-import '../log_tab.dart';
+import 'exercise_tab.dart';
+import 'meditation_tab.dart';
+import 'diet_tab.dart';
+import 'log_tab.dart';
+import 'profile_screen.dart';
+import 'talk_to_ai_screen.dart';
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  // Initialize notifications
+  final notificationService = NotificationService();
+  await notificationService.init();
+  await notificationService.scheduleDailyReminders();
   runApp(FitnessTrackerApp());
 }
 
@@ -19,31 +28,98 @@ class FitnessTrackerApp extends StatelessWidget {
   }
 }
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
+  @override
+  _HomeScreenState createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  int _selectedIndex = 0;
+
+  // Define the tabs
+  final List<Widget> _tabs = [
+    ExerciseTab(),
+    MeditationTab(),
+    DietTab(),
+    LogTab(),
+  ];
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    return DefaultTabController(
-      length: 4,
-      child: Scaffold(
-        appBar: AppBar(
-          title: Text('Fitness Tracker'),
-          bottom: TabBar(
-            tabs: [
-              Tab(text: 'Exercise'),
-              Tab(text: 'Meditation'),
-              Tab(text: 'Diet'),
-              Tab(text: 'Logs'),
-            ],
-          ),
-        ),
-        body: TabBarView(
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Fitness Tracker'),
+      ),
+      drawer: Drawer(
+        child: ListView(
+          padding: EdgeInsets.zero,
           children: [
-            ExerciseTab(),
-            MeditationTab(),
-            DietTab(),
-            LogTab(),
+            DrawerHeader(
+              decoration: BoxDecoration(
+                color: Colors.blue,
+              ),
+              child: Text(
+                'Menu',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 24,
+                ),
+              ),
+            ),
+            ListTile(
+              leading: Icon(Icons.person),
+              title: Text('Profile'),
+              onTap: () {
+                Navigator.pop(context); // Close the drawer
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => ProfileScreen()),
+                );
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.chat),
+              title: Text('Talk to AI'),
+              onTap: () {
+                Navigator.pop(context); // Close the drawer
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => TalkToAIScreen()),
+                );
+              },
+            ),
           ],
         ),
+      ),
+      body: _tabs[_selectedIndex], // Display the selected tab
+      bottomNavigationBar: BottomNavigationBar(
+        currentIndex: _selectedIndex,
+        onTap: _onItemTapped,
+        type: BottomNavigationBarType.fixed,
+        items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: Icon(Icons.fitness_center), // Workout icon
+            label: 'Exercise',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.self_improvement), // Meditation icon
+            label: 'Meditation',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.restaurant), // Diet icon
+            label: 'Diet',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.list), // Log icon
+            label: 'Log',
+          ),
+        ],
       ),
     );
   }

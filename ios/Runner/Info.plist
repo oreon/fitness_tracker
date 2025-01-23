@@ -47,5 +47,9 @@
 	<true/>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
+	<key>NSLocalNotificationUsageDescription</key>
+	<string>We need permission to send you reminders.</string>
+	<key>NSRemindersUsageDescription</key>
+	<string>We need permission to send you reminders.</string>
 </dict>
 </plist>
