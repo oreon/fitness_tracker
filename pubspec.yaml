@@ -32,7 +32,7 @@ dependencies:
     sdk: flutter
   sqflite: ^2.0.0+4 # For SQLite database
   path_provider: ^2.0.11 # For file system access
-  intl: ^0.17.0 # For date formatting
+  intl: ^0.18.1 # For date formatting
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
@@ -68,6 +68,7 @@ flutter:
   assets:
     - assets/sounds/start_sound.mp3
     - assets/sounds/rest_sound.mp3
+    - assets/images/meditation_image.jpg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

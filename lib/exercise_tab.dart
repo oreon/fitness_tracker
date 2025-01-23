@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:audioplayers/audioplayers.dart'; // For playing sounds
-import 'database_helper.dart';
+import '../database_helper.dart';
 
 class ExerciseTab extends StatefulWidget {
   @override
@@ -21,6 +21,7 @@ class _ExerciseTabState extends State<ExerciseTab> {
   bool _isWorkoutActive = false;
   bool _isRestPeriod = false;
   String _currentStatus = 'Press Start to Begin';
+  int _totalWorkoutDuration = 0; // Track total workout duration
 
   Future<void> _playSound(String soundFile) async {
     await _audioPlayer.play(AssetSource('sounds/$soundFile'));
@@ -30,6 +31,7 @@ class _ExerciseTabState extends State<ExerciseTab> {
     setState(() {
       _isWorkoutActive = true;
       _currentStatus = 'Get Ready!';
+      _totalWorkoutDuration = 0; // Reset total duration
     });
 
     Future.delayed(Duration(seconds: 3), () {
@@ -76,6 +78,7 @@ class _ExerciseTabState extends State<ExerciseTab> {
       if (_timeRemaining > 0) {
         setState(() {
           _timeRemaining--;
+          _totalWorkoutDuration++; // Increment total duration
         });
         _startTimer();
       } else {
@@ -99,7 +102,10 @@ class _ExerciseTabState extends State<ExerciseTab> {
 
     // Log the workout
     final date = DateTime.now().toIso8601String().split('T').first;
+    final durationInMinutes = _totalWorkoutDuration ~/ 60;
     DatabaseHelper().logScore(date, 'Workout', 30);
+    DatabaseHelper()
+        .logWorkout(date, durationInMinutes, _exercises.join(', '), 3);
   }
 
   @override
