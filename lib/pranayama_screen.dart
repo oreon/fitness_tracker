@@ -1,15 +1,16 @@
+import 'package:fitness_tracker/workout_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:audioplayers/audioplayers.dart';
 import 'dart:async';
 
-class PranayamaScreen extends StatefulWidget {
+class PranayamaScreen extends WorkoutScreen {
   const PranayamaScreen({Key? key}) : super(key: key);
 
   @override
   _PranayamaScreenState createState() => _PranayamaScreenState();
 }
 
-class _PranayamaScreenState extends State<PranayamaScreen> {
+class _PranayamaScreenState extends WorkoutScreenState<PranayamaScreen> {
   final List<Map<String, dynamic>> pranayamaTechniques = [
     {'name': 'Bhastrika', 'duration': 180}, // 3 minutes
     {'name': 'Kapalbhati', 'duration': 300}, // 5 minutes
@@ -44,6 +45,7 @@ class _PranayamaScreenState extends State<PranayamaScreen> {
             playTransitionSound();
           } else {
             timer.cancel(); // Stop the timer when all techniques are done
+            showWorkoutCompleteDialog('Pranayama');
           }
         }
       });

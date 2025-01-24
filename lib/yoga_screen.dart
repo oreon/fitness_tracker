@@ -1,15 +1,16 @@
+import 'package:fitness_tracker/workout_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:audioplayers/audioplayers.dart';
 import 'dart:async';
 
-class YogaScreen extends StatefulWidget {
+class YogaScreen extends WorkoutScreen {
   const YogaScreen({Key? key}) : super(key: key);
 
   @override
   _YogaScreenState createState() => _YogaScreenState();
 }
 
-class _YogaScreenState extends State<YogaScreen> {
+class _YogaScreenState extends WorkoutScreenState<YogaScreen> {
   final List<Map<String, dynamic>> asanas = [
     {
       'name': 'Downward Dog',
@@ -79,6 +80,7 @@ class _YogaScreenState extends State<YogaScreen> {
               playTransitionSound();
             } else {
               timer.cancel(); // Stop the timer when all asanas are done
+              showWorkoutCompleteDialog('Yoga');
             }
           }
         });

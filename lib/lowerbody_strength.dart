@@ -1,15 +1,17 @@
+import 'package:fitness_tracker/workout_screen.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
 import 'package:audioplayers/audioplayers.dart';
 
-class LowerBodyWorkoutScreen extends StatefulWidget {
+class LowerBodyWorkoutScreen extends WorkoutScreen {
   const LowerBodyWorkoutScreen({Key? key}) : super(key: key);
 
   @override
   _LowerBodyWorkoutScreenState createState() => _LowerBodyWorkoutScreenState();
 }
 
-class _LowerBodyWorkoutScreenState extends State<LowerBodyWorkoutScreen> {
+class _LowerBodyWorkoutScreenState
+    extends WorkoutScreenState<LowerBodyWorkoutScreen> {
   final List<Map<String, dynamic>> _exercises = [
     {
       'name': 'Squats',
@@ -77,7 +79,7 @@ class _LowerBodyWorkoutScreenState extends State<LowerBodyWorkoutScreen> {
                   _currentExerciseIndex = 0; // Reset to the first exercise
                 } else {
                   _timer.cancel(); // End workout after 3 sets
-                  _navigateToCompletionScreen();
+                  showWorkoutCompleteDialog('Pranayama');
                 }
               }
               _playStartAudio(); // Play start audio when work phase begins

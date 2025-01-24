@@ -56,6 +56,16 @@ class DatabaseHelper {
   ''');
 
     await db.execute('''
+    CREATE TABLE IF NOT EXISTS gen_logs (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      date TEXT NOT NULL,
+      duration INTEGER NOT NULL,
+      activity TEXT NOT NULL,
+      time TEXT NOT NULL
+    )
+  ''');
+
+    await db.execute('''
     CREATE TABLE IF NOT EXISTS workout_logs (
       id INTEGER PRIMARY KEY AUTOINCREMENT,
       date TEXT NOT NULL,
@@ -129,6 +139,17 @@ class DatabaseHelper {
         'time': 'Completed at ${log['date']}',
       };
     }).toList();
+  }
+
+  Future<void> logActivity(String activity, String comments) async {
+    final db = await database;
+    final date = DateTime.now().toIso8601String().split('T').first;
+    await db.insert('gen_logs', {
+      'date': date,
+      'activity': activity,
+      'comments': comments,
+      'time': DateTime.now().toIso8601String(), // Add timestamp
+    });
   }
 
   Future<void> logFood(String date, String mealType, String food) async {

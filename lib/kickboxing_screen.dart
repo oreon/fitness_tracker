@@ -1,15 +1,16 @@
+import 'package:fitness_tracker/workout_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:audioplayers/audioplayers.dart';
 import 'dart:async';
 
-class KickboxingScreen extends StatefulWidget {
+class KickboxingScreen extends WorkoutScreen {
   const KickboxingScreen({Key? key}) : super(key: key);
 
   @override
   _KickboxingScreenState createState() => _KickboxingScreenState();
 }
 
-class _KickboxingScreenState extends State<KickboxingScreen> {
+class _KickboxingScreenState extends WorkoutScreenState<KickboxingScreen> {
   final List<Map<String, dynamic>> combos = [
     {'name': 'Jab, Cross, Lead Hook', 'duration': 120}, // 2 minutes
     {'name': 'Front Kick, Side Kick, Elbow', 'duration': 120}, // 2 minutes
@@ -45,6 +46,7 @@ class _KickboxingScreenState extends State<KickboxingScreen> {
               playTransitionSound();
             } else {
               timer.cancel(); // Stop the timer when all combos are done
+              showWorkoutCompleteDialog('KickBoxing');
             }
           } else {
             // Start 1-minute rest period
