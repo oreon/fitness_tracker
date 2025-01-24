@@ -61,6 +61,7 @@ class DatabaseHelper {
       date TEXT NOT NULL,
       duration INTEGER NOT NULL,
       activity TEXT NOT NULL,
+      comments TEXT NOT NULL,
       time TEXT NOT NULL
     )
   ''');
@@ -93,6 +94,15 @@ class DatabaseHelper {
       [date],
     );
     return result.first['total'] as int? ?? 0;
+  }
+
+  Future<List<Map<String, dynamic>>> getLogsByDate(String date) async {
+    final db = await database;
+    return await db.query(
+      'gen_logs',
+      where: 'date = ?',
+      whereArgs: [date],
+    );
   }
 
   Future<List<Map<String, dynamic>>> getFoodLogs(String date) async {
@@ -141,13 +151,15 @@ class DatabaseHelper {
     }).toList();
   }
 
-  Future<void> logActivity(String activity, String comments) async {
+  Future<void> logActivity(
+      String activity, int duration, String comments) async {
     final db = await database;
     final date = DateTime.now().toIso8601String().split('T').first;
     await db.insert('gen_logs', {
       'date': date,
       'activity': activity,
       'comments': comments,
+      'duration': duration,
       'time': DateTime.now().toIso8601String(), // Add timestamp
     });
   }

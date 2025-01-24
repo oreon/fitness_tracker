@@ -1,7 +1,7 @@
 import 'package:fitness_tracker/kickboxing_screen.dart';
 import 'package:fitness_tracker/notifications_service.dart';
 import 'package:flutter/material.dart';
-import 'exercise_screen.dart';
+
 import 'exercise_tab.dart';
 import 'lowerbody_strength.dart';
 import 'meditation_tab.dart';
@@ -52,7 +52,7 @@ class _HomeScreenState extends State<HomeScreen> {
     ExerciseTab(),
     MeditationTab(),
     DietTab(),
-    LogTab(),
+    LogScreen(),
   ];
 
   void _onItemTapped(int index) {

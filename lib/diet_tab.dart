@@ -12,6 +12,7 @@ class _DietTabState extends State<DietTab> {
   Future<void> _logMeal(String mealType) async {
     final date = DateTime.now().toIso8601String().split('T').first;
     await DatabaseHelper().logFood(date, mealType, 'Healthy Meal');
+    await DatabaseHelper().logActivity(mealType, 0, _foodController.text);
     await DatabaseHelper().logScore(date, 'Healthy $mealType', 10);
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(content: Text('$mealType logged!')),
@@ -21,7 +22,8 @@ class _DietTabState extends State<DietTab> {
   Future<void> _logCustomFood() async {
     if (_foodController.text.isNotEmpty) {
       final date = DateTime.now().toIso8601String().split('T').first;
-      await DatabaseHelper().logFood(date, 'Custom', _foodController.text);
+      await DatabaseHelper()
+          .logActivity(_foodController.text, 0, _foodController.text);
       _foodController.clear();
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text('Food logged!')),
