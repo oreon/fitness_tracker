@@ -1,11 +1,16 @@
+import 'package:fitness_tracker/kickboxing_screen.dart';
 import 'package:fitness_tracker/notifications_service.dart';
 import 'package:flutter/material.dart';
+import 'exercise_screen.dart';
 import 'exercise_tab.dart';
+import 'lowerbody_strength.dart';
 import 'meditation_tab.dart';
 import 'diet_tab.dart';
 import 'log_tab.dart';
+import 'pranayama_screen.dart';
 import 'profile_screen.dart';
 import 'talk_to_ai_screen.dart';
+import 'yoga_screen.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -24,6 +29,12 @@ class FitnessTrackerApp extends StatelessWidget {
       title: 'Fitness Tracker',
       theme: ThemeData(primarySwatch: Colors.blue),
       home: HomeScreen(),
+      routes: {
+        '/exercise': (context) => LowerBodyWorkoutScreen(),
+        '/yoga': (context) => YogaScreen(),
+        '/pranayama': (context) => PranayamaScreen(),
+        '/kickboxing': (context) => KickboxingScreen(),
+      },
     );
   }
 }
