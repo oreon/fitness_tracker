@@ -14,27 +14,27 @@ class _PranayamaScreenState extends WorkoutScreenState<PranayamaScreen> {
       : super(exercises: [
           {
             'name': 'Bhastrika',
-            'duration': 18,
+            'duration': 180,
             'image': 'assets/images/meditation_image.jpg'
           },
           {
             'name': 'Kapalbhati',
-            'duration': 30,
+            'duration': 300,
             'image': 'assets/images/meditation_image.jpg'
           },
           {
             'name': 'Nadi Shodhan',
-            'duration': 42,
+            'duration': 420,
             'image': 'assets/images/meditation_image.jpg'
           },
           {
             'name': 'Bhramari',
-            'duration': 12,
+            'duration': 120,
             'image': 'assets/images/bhramarimeditation_image.jpg'
           },
           {
             'name': 'Ujjayi',
-            'duration': 18,
+            'duration': 180,
             'image': 'assets/images/meditation_image.jpg'
           },
         ], sets: 1, workoutName: 'Pranayama', restDuration: 0);

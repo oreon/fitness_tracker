@@ -34,7 +34,7 @@ class _KickboxingScreenState extends WorkoutScreenState<KickboxingScreen> {
             },
           ],
           sets: 1,
-          restDuration: 6,
+          restDuration: 60,
           workoutName: 'Kickboxing',
         );
 }

@@ -13,32 +13,32 @@ class _YogaScreenState extends WorkoutScreenState<YogaScreen> {
       : super(exercises: [
           {
             'name': 'Downward Dog',
-            'duration': 12,
+            'duration': 120,
             'image': 'assets/images/upper/VUp.gif'
           },
           {
             'name': 'Seated Forward Bend',
-            'duration': 12,
+            'duration': 120,
             'image': 'assets/images/upper/Plank_Ups.gif'
           },
           {
             'name': 'Cobblers Pose',
-            'duration': 18,
+            'duration': 120,
             'image': 'assets/images/upper/VUp.gif'
           },
           {
             'name': 'Bridge Pose',
-            'duration': 18,
+            'duration': 120,
             'image': 'assets/images/meditation_image.jpg'
           },
           {
             'name': 'Shoulder stand',
-            'duration': 18,
+            'duration': 180,
             'image': 'assets/images/meditation_image.jpg'
           },
           {
             'name': 'Shavasana (corpse)',
-            'duration': 18,
+            'duration': 180,
             'image': 'assets/images/meditation_image.jpg'
           },
         ], sets: 1, workoutName: 'Yoga', restDuration: 0);
